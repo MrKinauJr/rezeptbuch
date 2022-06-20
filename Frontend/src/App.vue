@@ -2,6 +2,7 @@
   <Navbar></Navbar>
   <router-view/>
   <Footer></Footer>
+
 </template>
 
 <style>
@@ -28,12 +29,30 @@ h1, h2, h3, h4, h5, h6 {
   color: inherit;
 }
 
-h1 { font-size: 2.5rem; }
-h2 { font-size: 2rem; }
-h3 { font-size: 1.75rem; }
-h4 { font-size: 1.5rem; }
-h5 { font-size: 1.25rem; }
-h6 { font-size: 1rem; }
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
 p {
   line-height: 1.5;
   margin: 0 0 1rem 0;
@@ -193,13 +212,13 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 span.flag {
-  width:44px;
-  height:30px;
-  display:inline-block;
+  width: 44px;
+  height: 30px;
+  display: inline-block;
 }
 
 img.flag {
-  width:30px
+  width: 30px
 }
 
 .true-icon {
@@ -213,10 +232,11 @@ img.flag {
 
 </style>
 <script>
-import { provide } from "@vue/runtime-core";
+import {provide} from "@vue/runtime-core";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import RecipeService from "@/services/RecipeService";
+
 export default {
   components: {Footer, Navbar},
   setup() {

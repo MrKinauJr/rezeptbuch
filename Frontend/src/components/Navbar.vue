@@ -24,10 +24,12 @@ export default {
     routes() {
       var items = [];
       router.routes.forEach((route)=>{
-        items.push({
-          label: route.name,
-          to: route.path
-        })
+        if (!route.path.includes(":")) {
+          items.push({
+            label: route.name,
+            to: route.path
+          })
+        }
       })
       return items;
     }

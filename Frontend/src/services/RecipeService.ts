@@ -1,13 +1,11 @@
 import axios, {AxiosResponse} from "axios";
 import Recipe from "@/models/Recipe";
-import {IngredientDTO, RecipeDTO, RecipeIngredientDTO, StepDTO} from "@/DTOs/RecipeDTO";
+import {RecipeDTO, RecipeIngredientDTO, StepDTO} from "@/DTOs/RecipeDTO";
 import Ingredient from "@/models/Ingredient";
 import Step from "@/models/Step";
 
 export default class RecipeService {
-
-
-    public getRecipes() {
+    public getRecipes(): Promise<Recipe[]> {
         return new Promise<Recipe[]>((resolve) => {
             axios.get("http://localhost/api/recipes", {withCredentials: true}).then((response: AxiosResponse<RecipeDTO[]>) => {
                 const recipes: Recipe[] = [];
@@ -18,9 +16,10 @@ export default class RecipeService {
                     });
                     const steps: Step[] = [];
                     recipeDTO.steps.forEach((stepDTO: StepDTO) => {
-                        steps.push(new Step(stepDTO.description,0));
+                        steps.push(new Step(stepDTO.title, stepDTO.description, stepDTO.stepNumber));
+                        console.log(steps)
                     });
-                    recipes.push(new Recipe(recipeDTO.id, recipeDTO.name, recipeDTO.description, ingredients, steps,recipeDTO.image, recipeDTO.time,recipeDTO.servings,[]));
+                    recipes.push(new Recipe(recipeDTO.id, recipeDTO.name, recipeDTO.description, ingredients, steps, recipeDTO.image, recipeDTO.time, recipeDTO.servings, []));
                 });
                 resolve(recipes)
             });

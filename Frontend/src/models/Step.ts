@@ -1,9 +1,11 @@
 export default  class Step {
     constructor(
+        public title: string,
         public description: string,
-        public duration: number
+        public stepNumber: number
     ) {
+        this.title = title;
+        this.stepNumber = stepNumber;
         this.description = description;
-        this.duration = duration;
     }
 }

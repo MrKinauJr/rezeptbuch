@@ -21,7 +21,6 @@ public class RecipeDto implements Serializable {
     private Set<StepDto> steps;
 
     @Data
-
     @NoArgsConstructor
     @AllArgsConstructor
     public static class RecipeIngredientDto implements Serializable {
@@ -43,5 +42,6 @@ public class RecipeDto implements Serializable {
         private Long id;
         private Long stepNumber;
         private String description;
+        private String title;
     }
 }

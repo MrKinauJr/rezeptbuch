@@ -13,7 +13,7 @@
         <img
             :alt="recipeData.name"
             :src="recipeData.image"
-            style="height: 20vh;"
+            style="height: 20vh; border-radius: 5px;"
         />
         <div class="recipe-name">{{ recipeData.name }}</div>
         <div class="recipe-description">
@@ -21,9 +21,10 @@
         </div>
       </div>
       <div class="recipe-grid-item-bottom">
-              <span class="recipe-price">{{ recipeData.steps.length }} Schritte - {{
-                  recipeData.time
-                }} Minuten</span>
+        <span v-if="recipeData.steps.length > 1" class="recipe-price">{{ recipeData.steps.length }} Schritte</span>
+        <span v-else class="recipe-price">{{ recipeData.steps.length }} Schritt</span>
+        <span v-if="recipeData.time" class="recipe-price">{{ recipeData.time }} Minuten</span>
+        <span v-else class="recipe-price">{{ recipeData.time }} Minute</span>
       </div>
     </div>
   </div>
@@ -78,19 +79,20 @@ export default {
   padding: 1rem;
   width: 100%;
 
-img {
-  width: 50px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  margin-right: 2rem;
-}
+  img {
+    width: 50px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    margin-right: 2rem;
+    border-radius: 25px;
+  }
 
 
-.recipe-price {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: .5rem;
-  align-self: flex-end;
-}
+  .recipe-price {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: .5rem;
+    align-self: flex-end;
+  }
 
 }
 

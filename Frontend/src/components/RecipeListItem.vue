@@ -4,7 +4,7 @@
       <img
           :alt="recipeData.name"
           :src="recipeData.image"
-          style="width: 10em;"
+          style="width: 10em;  border-radius: 5px;"
       />
       <div class="recipe-list-detail">
         <div class="recipe-name">{{ recipeData.name }}</div>

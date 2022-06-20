@@ -22,7 +22,9 @@
         <RecipeGridItem :recipe-data="slotProps.data"></RecipeGridItem>
       </template>
       <template #empty><p class="m-5 text-center">{{ emptyMessage }}</p></template>
+
     </DataView>
+
   </div>
 </template>
 

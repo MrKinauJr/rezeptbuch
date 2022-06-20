@@ -1,7 +1,10 @@
 package network.kinau.recipes.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import java.util.Objects;
@@ -27,6 +30,9 @@ public class Step {
 
     @Column(name = "description", nullable = false, length = 512)
     private String description;
+
+    @Column(name = "title", length = 40)
+    private String title;
 
     @Override
     public boolean equals(Object o) {
