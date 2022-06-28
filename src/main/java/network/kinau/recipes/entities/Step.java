@@ -17,11 +17,12 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class Step {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "recipe_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "recipe_id", nullable = true)
     @ToString.Exclude
     private Recipe recipe;
 

@@ -1,5 +1,7 @@
+import {TagDTO} from "@/DTOs/TagDTO";
+
 export interface RecipeDTO {
-    id: number;
+    id: string | null;
     name: string;
     description: string;
     image: string;
@@ -7,6 +9,8 @@ export interface RecipeDTO {
     servings: number;
     recipeIngredients: RecipeIngredientDTO[];
     steps: StepDTO[];
+    tags: TagDTO[];
+    createdAt: string | null;
 }
 
 export interface RecipeIngredientDTO {
@@ -16,12 +20,12 @@ export interface RecipeIngredientDTO {
 }
 
 export interface IngredientDTO {
-    id: number;
+    id: string | null;
     name: string;
 }
 
 export interface StepDTO {
-    id: number;
+    id: string | null;
     stepNumber: number;
     description: string;
     title: string;

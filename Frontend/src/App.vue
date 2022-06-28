@@ -236,11 +236,13 @@ import {provide} from "@vue/runtime-core";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import RecipeService from "@/services/RecipeService";
+import TagService from "@/services/TagService";
 
 export default {
   components: {Footer, Navbar},
   setup() {
     provide("recipeService", new RecipeService());
+    provide("tagService", new TagService());
   }
 }
 </script>

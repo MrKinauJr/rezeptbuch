@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div class="surface-section px-4 py-8 md:px-6 lg:px-8">
+    <div class="px-4 py-8 md:px-6 lg:px-8">
       <div class="border-top-1 border-300 pt-5 text-center"><img alt="Image" height="36"
                                                                  src="images/blocks/logos/bastion-500.svg">
         <ul class="list-none p-0 mx-0 my-5 flex justify-content-center flex-column align-items-center lg:flex-row">

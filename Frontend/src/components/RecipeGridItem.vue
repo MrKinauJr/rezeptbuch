@@ -1,11 +1,11 @@
 <template>
-  <div class="col-12 md:col-4">
+  <div v-on:click="onClick" class="col-12 md:col-4">
     <div class="recipe-grid-item card">
       <div class="recipe-grid-item-top">
         <div>
           <i class="pi pi-tag recipe-category-icon"></i>
           <span class="recipe-category">{{
-              recipeData.tags.join(", ")
+              tags.join(", ")
             }}</span>
         </div>
       </div>
@@ -39,6 +39,21 @@ export default {
     recipeData: {
       type: Recipe,
       required: true
+    }
+  },
+  methods: {
+    onClick() {
+      this.$router.push({
+        name: "Rezept",
+        params: {
+          id: this.recipeData.id.toString()
+        }
+      });
+    }
+  },
+  computed: {
+    tags() {
+      return this.recipeData.tags.map(tag => tag.name);
     }
   }
 }

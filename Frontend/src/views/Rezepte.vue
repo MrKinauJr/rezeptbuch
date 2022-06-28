@@ -7,13 +7,12 @@
             <DataViewLayoutOptions v-model="layout"/>
           </div>
           <div class="col-6" style="text-align: right">
-            <button class="p-button p-component p-button-raised p-button-success" type="button">
+            <button v-on:click="$router.push({name: 'newRezept'})" class="p-button p-component p-button-raised p-button-success" type="button">
               <i class="pi pi-plus"></i><span class="p-button-label ml-2">Neues Rezept</span>
             </button>
           </div>
         </div>
       </template>
-      <template #footer>Footer Content</template>
 
       <template #list="slotProps">
         <RecipeListItem :recipe-data="slotProps.data"></RecipeListItem>

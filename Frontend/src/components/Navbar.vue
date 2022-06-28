@@ -1,8 +1,8 @@
 <template>
   <div>
-    <Menubar :model="routes">
+    <Menubar class="surface-card" :model="routes">
       <template #start>
-        <img alt="logo" src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" height="40" class="mr-2">
+        <img alt="logo" src="/icon.png" height="40" class="mr-2">
       </template>
 
     </Menubar>
@@ -24,7 +24,7 @@ export default {
     routes() {
       var items = [];
       router.routes.forEach((route)=>{
-        if (!route.path.includes(":")) {
+        if (route.meta.navbar) {
           items.push({
             label: route.name,
             to: route.path

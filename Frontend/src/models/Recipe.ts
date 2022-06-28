@@ -1,8 +1,9 @@
 import Ingredient from "@/models/Ingredient";
 import Step from "@/models/Step";
+import Tag from "@/models/Tag";
 
 export default class Recipe {
-    id: number;
+    id: string;
     name: string;
     description: string;
     ingredients: Ingredient[];
@@ -10,10 +11,11 @@ export default class Recipe {
     image: string;
     time: number;
     servings: number;
-    tags: string[];
+    tags: Tag[];
+    createdAt: string;
 
 
-    constructor(id: number, name: string, description: string, ingredients: Ingredient[], steps: Step[], image: string, time: number, servings: number, tags: string[]) {
+    constructor(id: string, name: string, description: string, ingredients: Ingredient[], steps: Step[], image: string, time: number, servings: number, tags: Tag[], createdAt: string) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -22,6 +24,8 @@ export default class Recipe {
         this.image = image;
         this.time = time;
         this.servings = servings;
+        console.log(tags);
         this.tags = tags;
+        this.createdAt = createdAt;
     }
 }

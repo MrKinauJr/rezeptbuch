@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
 
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -16,7 +17,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class Recipe {
     @Id
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name", nullable = false)
@@ -28,11 +29,14 @@ public class Recipe {
     @Column(name = "image", nullable = false)
     private String image;
 
-    @Column(name = "\"time\"", nullable = false)
-    private Long time;
-
     @Column(name = "servings", nullable = false)
     private Long servings;
+
+    @Column(name = "time", nullable = false)
+    private Long time;
+
+    @Column(name = "created_at", nullable = true)
+    private Date createdAt;
 
     @OneToMany(mappedBy = "recipe")
     @ToString.Exclude
@@ -41,6 +45,18 @@ public class Recipe {
     @OneToMany(mappedBy = "recipe")
     @ToString.Exclude
     private Set<Step> steps = new LinkedHashSet<>();
+
+    @ManyToMany
+    @JoinTable(name = "recipe_tag",
+            joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    private Set<Tag> tags = new LinkedHashSet<>();
+
+    @ManyToMany
+    @JoinTable(name = "recipe_category",
+            joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categories = new LinkedHashSet<>();
 
     @Override
     public boolean equals(Object o) {
