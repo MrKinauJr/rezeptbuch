@@ -21,7 +21,15 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/newRecipe/',
         name: 'newRezept',
-        component: () => import('../views/CreateRecipeView.vue'),
+        component: () => import('../views/RecipeFormView.vue'),
+        meta: {
+            navbar: false
+        }
+    },
+    {
+        path: '/editRecipe/:id',
+        name: 'editRezept',
+        component: () => import('../views/RecipeFormView.vue'),
         meta: {
             navbar: false
         }

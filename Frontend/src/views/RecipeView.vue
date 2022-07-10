@@ -1,22 +1,17 @@
 <template>
-  <div v-if="recipe != null" class="w-8 ml-auto mr-auto px-4 py-5 md:px-6 lg:px-8">
-    <div class="flex md:align-items-center md:justify-content-between flex-column md:flex-row pb-4 border-bottom-1 surface-border">
-      <div class="mb-3 lg:mb-0">
-        <div class="text-6xl font-normal text-900">{{ recipe.name }}</div>
-      </div>
-    </div>
-
-    <div class="text-800">
-      <div class="w-auto p-2 text-center md:text-left flex justify-content-center align-items-center flex-column">
-        <img :src="recipe.image" alt="Image"
-             class="xl:w-6 sm:w-10 w-7"
-             style="">
-        <div class="mt-3 mb-4 text-center text-700">{{
-            recipe.description
-          }}
+  <div v-if="recipe != null" class="w-9 ml-auto mr-auto ">
+    <div class="px-4 py-8 md:px-6 lg:px-8">
+      <div class="surface-card p-4 shadow-2 border-round">
+        <div class="text-6xl mb-3 font-normal text-900">{{ recipe.name }}</div>
+        <div class="flex" style="min-height: 20rem;">
+          <div class="col-6">
+            <img :src="recipe.image" alt="Image"
+                 class="col-12"
+                 style="">
+            <div class="col-12 text-500 mr-0 md:mr-3">{{ recipe.description }}</div>
+          </div>
+          <StepList :steps="recipe.steps" class="ml-3 col-6"></StepList>
         </div>
-        <StepList :steps="recipe.steps" class="xl:w-7 sm:w-10 w-7"></StepList>
-
       </div>
     </div>
   </div>
@@ -56,7 +51,7 @@ export default defineComponent({
   mounted() {
     this.recipeService.getRecipe(this.$route.params.id as string).then((recipe: Recipe) => {
       console.log(recipe)
-      this.recipe = recipe;
+      setTimeout(()=>{this.recipe = recipe;}, 1000);
     }).catch((error: Error) => {
       console.error(error);
       this.error = true;

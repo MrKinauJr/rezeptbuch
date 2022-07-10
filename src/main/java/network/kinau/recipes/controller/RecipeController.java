@@ -17,6 +17,10 @@ public class RecipeController {
     @Autowired
     private RecipeService recipeService;
 
+    @DeleteMapping("/{id}")
+    public void deleteRecipe(@PathVariable("id") Long id) {
+        recipeService.deleteRecipe(id);
+    }
 
     @GetMapping("/{id}")
     public RecipeDto getRecipe(@PathVariable("id") long id) {

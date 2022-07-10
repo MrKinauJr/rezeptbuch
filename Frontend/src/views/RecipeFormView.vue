@@ -56,9 +56,8 @@
                          min="1" showButtons/>
           </div>
           <div class="field mb-4 col-12 md:col-6"><label class="font-medium text-900" for="country2">Tags</label>
-            <span v-if="v$.recipe.tags.$error && submitted" class="ml-1 font-normal text-xs p-error">Dieses Feld ist benötigt.</span>
             <MultiSelect v-model="recipe.tags" :filter="true" :emptyMessage="emptyText" :options="tags" :showToggleAll="false" display="chip"
-                         optionLabel="name"/>
+                         optionLabel="name" optionValue="id"/>
           </div>
           <div class="surface-border border-top-1 opacity-50 mb-3 col-12"></div>
           <div class="col-4"></div>
@@ -98,6 +97,7 @@ export default {
   data: function () {
     return {
       recipe: {
+        id: null,
         name: "",
         description: "",
         image: "",
@@ -134,8 +134,7 @@ export default {
               required
             }
           })
-        },
-        tags: {required}
+        }
       }
     }
   },
@@ -156,8 +155,6 @@ export default {
     saveRecipe: async function () {
       this.submitted = true
       const isValid = await this.v$.$validate()
-      console.log(isValid)
-      console.log(this.recipe);
       if (!isValid) {
         return;
       }
@@ -197,7 +194,16 @@ export default {
 
     this.tagService.getTags().then(tags => {
       this.tags = tags;
+      if (this.$route.params.id) {
+        this.recipeService.getRecipe(this.$route.params.id).then(recipe => {
+          this.recipe = recipe;
+          this.loaded = true;
+        })
+      } else {
+        this.loaded = true;
+      }
     })
+
   }
 }
 </script>

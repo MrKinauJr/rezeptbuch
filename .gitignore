@@ -32,4 +32,7 @@ build/
 ### VS Code ###
 .vscode/
 
+### Local Configuration ###
+.env
+
 Frontend/node_modules

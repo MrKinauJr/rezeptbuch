@@ -15,10 +15,10 @@
       </template>
 
       <template #list="slotProps">
-        <RecipeListItem :recipe-data="slotProps.data"></RecipeListItem>
+        <RecipeListItem @delete="onDelete" :recipe-data="slotProps.data"></RecipeListItem>
       </template>
       <template #grid="slotProps">
-        <RecipeGridItem :recipe-data="slotProps.data"></RecipeGridItem>
+        <RecipeGridItem @delete="onDelete" :recipe-data="slotProps.data"></RecipeGridItem>
       </template>
       <template #empty><p class="m-5 text-center">{{ emptyMessage }}</p></template>
 
@@ -51,6 +51,18 @@ export default defineComponent({
     return {
       recipeService
     };
+  },
+  methods: {
+    onDelete(id: string) {
+      this.recipeService.deleteRecipe(id).then(() => {
+        this.recipeService.getRecipes().then((recipes: Recipe[]) => {
+          this.recipes = recipes;
+          if (recipes.length === 0) {
+            this.emptyMessage = 'Keine Rezepte gefunden';
+          }
+        });
+      });
+    },
   },
   data: (): dataViewProps => {
     return {

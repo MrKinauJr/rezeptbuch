@@ -8,6 +8,9 @@
               tags.join(", ")
             }}</span>
         </div>
+        <div>
+          <Button @click="onDelete" class="p-button-danger" icon="pi pi-trash"/>
+        </div>
       </div>
       <div class="recipe-grid-item-content">
         <img
@@ -32,6 +35,7 @@
 
 <script>
 import Recipe from "../models/Recipe";
+import Button from "primevue/button";
 
 export default {
   name: "RecipeGridItem",
@@ -41,20 +45,36 @@ export default {
       required: true
     }
   },
+  data: () => {
+    return {
+      noRedirect: false
+    }
+  },
   methods: {
     onClick() {
+      if (this.noRedirect) {
+        return;
+      }
       this.$router.push({
         name: "Rezept",
         params: {
           id: this.recipeData.id.toString()
         }
       });
+    },
+    onDelete() {
+      this.noRedirect = true
+      this.$emit("delete", this.recipeData.id);
+      console.log("delete");
     }
   },
   computed: {
     tags() {
       return this.recipeData.tags.map(tag => tag.name);
     }
+  },
+  components: {
+    Button
   }
 }
 </script>

@@ -110,4 +110,14 @@ export default class RecipeService {
             });
         });
     }
+
+    deleteRecipe(id: string): Promise<boolean> {
+        return new Promise<boolean>((resolve, reject) => {
+            axios.delete(RecipeService.BASE_URL + "/" + id, {withCredentials: true}).then(() => {
+                resolve(true);
+            }).catch((error) => {
+                reject(error);
+            });
+        });
+    }
 }

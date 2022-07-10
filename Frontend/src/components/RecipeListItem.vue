@@ -1,5 +1,5 @@
 <template>
-  <div class="col-12">
+  <div class="col-12" v-on:click="onClick">
     <div class="recipe-list-item">
       <img
           :alt="recipeData.name"
@@ -13,13 +13,14 @@
         </div>
         <i class="pi pi-tag recipe-category-icon"></i>
         <span class="recipe-category">{{
-            recipeData.tags.join(", ")
+            tags.join(", ")
           }}</span>
       </div>
       <div class="recipe-list-action">
               <span class="recipe-price">{{ recipeData.steps.length }} Schritte - {{
                   recipeData.time
                 }} Minuten</span>
+        <Button class="ml-auto p-button-danger" icon="pi pi-trash" @click="onDelete"/>
       </div>
     </div>
   </div>
@@ -27,6 +28,7 @@
 
 <script>
 import Recipe from "../models/Recipe";
+import Button from "primevue/button";
 
 export default {
   name: "RecipeListItem",
@@ -35,6 +37,37 @@ export default {
       type: Recipe,
       required: true
     }
+  },
+  data: () => {
+    return {
+      noRedirect: false
+    }
+  },
+  methods: {
+    onClick() {
+      if (this.noRedirect) {
+        return;
+      }
+      this.$router.push({
+        name: "Rezept",
+        params: {
+          id: this.recipeData.id.toString()
+        }
+      });
+    },
+    onDelete() {
+      this.noRedirect = true
+      this.$emit("delete", this.recipeData.id);
+      console.log("delete");
+    }
+  },
+  computed: {
+    tags() {
+      return this.recipeData.tags.map(tag => tag.name);
+    }
+  },
+  components: {
+    Button
   }
 }
 </script>
@@ -66,48 +99,22 @@ export default {
   padding: 1rem;
   width: 100%;
 
-img {
-  width: 50px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  margin-right: 2rem;
-}
-
-.recipe-list-detail {
-  flex: 1 1 0;
-}
-
-
-.recipe-price {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: .5rem;
-  align-self: flex-end;
-}
-
-.recipe-list-action {
-  display: flex;
-  flex-direction: column;
-}
-
-}
-
-
-
-@media screen and (max-width: 576px) {
-  .recipe-list-item {
-    flex-direction: column;
-    align-items: center;
-
   img {
-    margin: 2rem 0;
+    width: 50px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    margin-right: 2rem;
   }
 
   .recipe-list-detail {
-    text-align: center;
+    flex: 1 1 0;
   }
 
+
   .recipe-price {
-    align-self: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: .5rem;
+    align-self: flex-end;
   }
 
   .recipe-list-action {
@@ -115,13 +122,38 @@ img {
     flex-direction: column;
   }
 
-  .recipe-list-action {
-    margin-top: 2rem;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
 }
+
+
+@media screen and (max-width: 576px) {
+  .recipe-list-item {
+    flex-direction: column;
+    align-items: center;
+
+    img {
+      margin: 2rem 0;
+    }
+
+    .recipe-list-detail {
+      text-align: center;
+    }
+
+    .recipe-price {
+      align-self: center;
+    }
+
+    .recipe-list-action {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .recipe-list-action {
+      margin-top: 2rem;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+  }
 }
 </style>

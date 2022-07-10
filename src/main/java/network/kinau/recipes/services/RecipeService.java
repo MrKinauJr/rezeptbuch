@@ -24,6 +24,10 @@ public class RecipeService {
     @Autowired
     private ModelMapper modelMapper;
 
+    public void deleteRecipe(long id) {
+        recipeRepository.deleteById(id);
+    }
+
     public Recipe getRecipe(Long id) {
         return recipeRepository.getRecipeById(id);
     }
