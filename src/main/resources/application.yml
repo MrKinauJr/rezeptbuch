@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: ${env.DB_URL}
+    username: ${env.DB_USER}
+    password: ${env.DB_PASS}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        dialect: org.hibernate.dialect.CockroachDB201Dialect
+server:
+  port: 9000
